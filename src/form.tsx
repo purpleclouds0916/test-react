@@ -110,7 +110,7 @@ export const form = `{
   
       "Density": {
         "type": "object",
-        "title": "Densityです",
+        "title": "植栽密度",
         "properties": {
           "Plant": {
             "title": "Plant",
@@ -118,18 +118,23 @@ export const form = `{
             "type": "array",
             "items": [
               {
+                "title": "Plantの左側",
+                "description": "Plantの左側の項目の説明が入ります",
                 "type": "number",
-                "default": 24.72
+                "default": 1000
               },
               {
+                "title": "Plantの右側",
+                "description": "Plantの右側の項目の説明が入ります",
                 "type": "number",
-                "default": -1.066
+                "default": 10000
               }
             ]
           },
           "Minimum": {
             "type": "number",
             "title": "MinimumAtClearcut",
+            "description": "MinimumAtClearcutの説明が入ります",
             "default": 500
           }
         }
@@ -140,90 +145,110 @@ export const form = `{
         "type": "array",
         "items": [
           {
+            "title": "植栽のコスト",
+            "description": "植栽のコストの説明が入ります",
             "type": "number",
-            "default": 24.72
+            "default": 928070
           },
           {
+            "title": "植栽の本数",
+            "description": "植栽の本数の説明が入ります",
             "type": "number",
-            "default": -1.066
+            "default": 128.292
           }
         ]
       },
       "ThinningPercent": {
-        "title": "ThinningPercent",
+        "title": "間伐率の割合",
         "minItems": 2,
         "type": "array",
         "items": [
           {
+            "title": "最小の間伐率",
+            "description": "最小の間伐率の説明が入ります",
             "type": "number",
-            "default": 24.72
+            "default": 0
           },
           {
+            "title": "最大の間伐率",
+            "description": "最大の間伐率の説明が入ります",
             "type": "number",
-            "default": -1.066
+            "default": 50
           }
         ]
       },
       "AnnualInterestPercent": {
+        "title": "とちきぼうか",
+        "description": "とちきぼうかの説明が入ります",
         "type": "number",
         "title": "AnnualInterestPercent",
         "default": -0.090657
       },
       "HarvestingAges": {
+        "title": "",
         "title": "HarvestingAges",
         "minItems": 3,
         "type": "array",
         "items": [
           {
-            "title": "間伐する最初の林齢",
+            "title": "間伐を開始する林齢",
+            "description": "植林後、一番最初の間伐をするまでの期間です.",
             "type": "number",
             "default": 10
           },
           {
             "title": "最大皆伐林齢",
+            "description": "植林から皆伐までの期間です",
             "type": "number",
             "default": 110
           },
           {
             "title": "間伐期間",
+            "description": "間伐の間隔の最小期間です。例えば、5年と設定すると、間伐後、5年間は間伐の作業が行われません",
             "type": "number",
             "default": 5
           }
         ]
       },
       "MaxNumOfHarvest": {
+        "title": "間伐期間",
+        "description": "間伐と皆伐の最大合計回数です。",
         "type": "number",
-        "title": "MaxNumOfHarvest",
         "default": 10
       },
   
       "Thinning": {
         "type": "object",
-        "title": "間伐です",
+        "title": "間伐材の費用計算について",
         "properties": {
           "YieldRate": {
             "type": "number",
-            "title": "伐採した木材のうち使える割合",
+            "title": "使える割合",
+            "description": "伐採した木材のうち販売に使える割合",
             "default": 0.58
           },
           "Cost": {
             "type": "number",
             "title": "伐採費用",
+            "description": "一回の間伐に必要な経費",
             "default": 5166
           },
           "StumpHeight": {
             "type": "number",
             "title": "切る高さ",
+            "description": "どれくらいの高さで木を伐採するか",
             "default": 0.5
           },
           "LogLength": {
             "type": "number",
             "title": "材長",
+            "description": "材長の説明が入ります",
             "default": 4.0
           },
           "LoggingPitch": {
             "type": "number",
             "title": "材長",
+            "description": "より多くとる材長の説明が入ります",
             "default": 4.1
           },
           "Diameter": {
@@ -333,7 +358,7 @@ export const form = `{
   
       "Clearcut": {
         "type": "object",
-        "title": "皆伐です",
+        "title": "皆伐材の費用計算について",
         "properties": {
           "YieldRate": {
             "type": "number",
