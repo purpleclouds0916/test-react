@@ -82,9 +82,7 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0"
   },
-  "simple-git-hooks": {
-    "pre-push": ". ./test-around"
-  },
+  "simple-git-hooks": {},
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "prettier --write --loglevel=error",
