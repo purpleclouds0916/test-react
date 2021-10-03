@@ -3,10 +3,8 @@ import Form from '@rjsf/core';
 
 import form from '../../form';
 import formCss from '../../formCss';
-import { WrapperDiv } from '../../functions/WrapperDiv';
 
 export const JsonForm: VFC = () => {
-  
   const schema = form;
 
   const uiSchema = formCss;
@@ -41,42 +39,6 @@ export const JsonForm: VFC = () => {
       uiSchema={uiSchema}
     />
   );
-};
-
-// JSONFORMのDOMツリーを修正するコード
-
-// 作成したdivのクラス名とまとめる要素のクラス名とどこの前にdivを挿入するのかを変数で追加できるようにする
-
-window.onload = () => {
-  const ClassThinningFlexItem = 'Thinning-flex-item';
-  const appendClassThinningFlexItem = 'Thinning-flex-items';
-  const parentThinningFlexItem = document.getElementById('root_Thinning');
-  const beforeThinningFlexItem = document.getElementsByClassName('Diameter')[0];
-
-  WrapperDiv(
-    ClassThinningFlexItem,
-    appendClassThinningFlexItem,
-    parentThinningFlexItem,
-    beforeThinningFlexItem,
-  );
-
-  const ClassClearcutFlexItem = 'Clearcut-flex-item';
-  const appendClassClearcutFlexItem = 'Clearcut-flex-items';
-  const parentClearcutFlexItem = document.getElementById('root_Clearcut');
-  const beforeClearcutFlexItem = document.getElementsByClassName('Diameter')[1];
-
-  WrapperDiv(
-    ClassClearcutFlexItem,
-    appendClassClearcutFlexItem,
-    parentClearcutFlexItem,
-    beforeClearcutFlexItem,
-  );
-
-  const elementBefore = document.getElementsByClassName('Density')[0];
-  const parents = document.getElementsByClassName('form-card-item')[1];
-  const div = document.createElement('div');
-  div.setAttribute('class', 'card-title');
-  parents.insertBefore(div, elementBefore);
 };
 
 export default JsonForm;

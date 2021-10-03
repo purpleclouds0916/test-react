@@ -6,26 +6,20 @@ import WrapperDiv from './functions/WrapperDiv';
 import LineChart from './components/organism/LineChart';
 import StandDensity from './components/organism/StandDensityManagementChart';
 
-
-
 const App: VFC = () => (
-  // eslint-disable-line
   <div className="App">
     <JsonForm />
     <StandDensity />
-    <LineChart
-      description=""
-      title=""
-      loggingMethod="Thinning"
-    />
+    <LineChart description="" title="" loggingMethod="Thinning" />
     <LineChart
       description="皆伐材の木材価格の説明が入ります"
       title="皆伐材の木材価格"
       loggingMethod="Clearcut"
-    />    
+    />
   </div>
 );
 
+// react-json-formのDOMツリーを修正するコード
 window.onload = () => {
   const ClassManagement = 'Management';
   const appendClassManagement = 'form-card-item';
@@ -81,7 +75,29 @@ window.onload = () => {
 
   SDMDparentElement.appendChild(SDMDLineChartElement); // eslint-disable-line
 
+  const ClassThinningFlexItem = 'Thinning-flex-item';
+  const appendClassThinningFlexItem = 'Thinning-flex-items';
+  const parentThinningFlexItem = document.getElementById('root_Thinning');
+  const beforeThinningFlexItem = document.getElementsByClassName('Diameter')[0];
 
+  WrapperDiv(
+    ClassThinningFlexItem,
+    appendClassThinningFlexItem,
+    parentThinningFlexItem,
+    beforeThinningFlexItem,
+  );
+
+  const ClassClearcutFlexItem = 'Clearcut-flex-item';
+  const appendClassClearcutFlexItem = 'Clearcut-flex-items';
+  const parentClearcutFlexItem = document.getElementById('root_Clearcut');
+  const beforeClearcutFlexItem = document.getElementsByClassName('Diameter')[1];
+
+  WrapperDiv(
+    ClassClearcutFlexItem,
+    appendClassClearcutFlexItem,
+    parentClearcutFlexItem,
+    beforeClearcutFlexItem,
+  );
 };
 
 export default App;
