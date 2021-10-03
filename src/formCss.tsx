@@ -7,7 +7,7 @@ export const formCss = {
     classNames: 'SAType test',
   },
   SDMD: {
-    classNames: 'SDMD',
+    classNames: 'SDMD form-card-item',
     H: {
       classNames: 'H-items',
       items: {
@@ -49,9 +49,9 @@ export const formCss = {
     },
   },
   RegenerationCost: {
-    classNames: 'RegenerationCost Management pan',
+    classNames: 'RegenerationCost Management',
     items: {
-      classNames: 'RegenerationCost-items pan',
+      classNames: 'RegenerationCost-items',
     },
   },
   ThinningPercent: {
@@ -84,13 +84,13 @@ export const formCss = {
       classNames: 'LoggingPitch Thinning-item Thinning-flex-item',
     },
     Diameter: {
-      classNames: 'Diameter Thinning-item',
+      classNames: 'Diameter  Thinning-diameter',
       items: {
         classNames: 'Diameter-items',
       },
     },
     Price: {
-        classNames: 'Price Thinning-item',
+        classNames: ' Thinning-price Price ',
         items: {
           classNames: 'Price-items',
         },
@@ -114,13 +114,13 @@ export const formCss = {
       classNames: 'LoggingPitch Clearcut-item Clearcut-flex-item',
     },
     Diameter: {
-      classNames: 'Diameter Clearcut-item',
+      classNames: 'Diameter Clearcut-item Clearcut-diameter',
       items: {
         classNames: 'Diameter-items',
       },
     },
     Price: {
-        classNames: 'Price Clearcut-item',
+        classNames: 'Price Clearcut-item Clearcut-price',
         items: {
           classNames: 'Price-items',
         },

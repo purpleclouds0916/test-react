@@ -13,7 +13,7 @@ export const form = `{
       },
   
       "SDMD": {
-        "title": "SDMDです",
+        "title": "林分密度管理図",
         "type": "object",
         "properties": {
           "H": {
@@ -252,7 +252,8 @@ export const form = `{
             "default": 4.1
           },
           "Diameter": {
-            "title": "Diameter",
+            "title": "間伐材の木材価格",
+            "description": "間伐材の木材価格の説明が入ります",
             "minItems": 11,
             "type": "array",
             "items": [
@@ -298,7 +299,7 @@ export const form = `{
               },
               {
                 "type": "number",
-                "default": 255
+                "default": 35
               }
             ]
           },
@@ -614,6 +615,6 @@ export const form = `{
         }
       }
     }
-  }`
-  
-  export default form;
+  }`;
+
+export default form;

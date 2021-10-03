@@ -1,0 +1,336 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+li,
+dt,
+dd,
+p,
+div,
+span,
+img,
+a,
+table,
+tr,
+th,
+td {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  border: 0;
+}
+
+header,
+footer,
+nav,
+section,
+article,
+aside,
+figure,
+figcaption {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+//
+//react-json-form-schmaの設定の削除
+//
+
+fieldset {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  min-inline-size: 0;
+}
+
+legend {
+  padding: 0;
+  border: none;
+}
+
+//
+//react-json-schmaの共通設定
+//
+
+#root_Density_Plant__title,
+#root_HarvestingAges__title,
+#root_Density__title,
+#root_ThinningPercent__title,
+#root_RegenerationCost__title,
+// #root_Thinning_Diameter__title,
+#root_Thinning_Price__title,
+#d3demo,
+.Simulated_Annealing,
+.YieldModelType,
+.SAType,
+// .H-items,
+// .V-items,
+.NRF-input,
+.DBH-items,
+.HF-items,
+.Clearcut-diameter,
+.Clearcut-price,
+// .Thinning-diameter,
+// .Thinning-price,
+.hidden {
+  display: none;
+}
+
+form {
+  padding-top: 100px;
+  padding-bottom: 120px;
+  margin-bottom: 12px;
+  background-color: #f8f8f8;
+
+  .form-items {
+    width: 1200px;
+    max-width: 100%;
+    height: inherit;
+    margin: 0 auto;
+  }
+}
+
+.form-card-item {
+  margin: 24px 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+
+  .card-title {
+    &::after {
+      display: block;
+      max-width: 100%;
+      padding: 32px 48px;
+      font-size: 24px;
+      font-weight: 700;
+      content: '経営方法の詳細';
+      background: #fafafa;
+    }
+  }
+
+  #root_SDMD__title,
+  #root_Thinning__title,
+  #root_Clearcut__title {
+    @extend .card-title::after;
+
+    width: 100%;
+  }
+
+  .Management,
+  .Thinning-item,
+  .SDMD-item,
+  .Clearcut-item {
+    padding: 24px 48px 0;
+
+    &:last-child {
+      padding-bottom: 24px;
+    }
+  }
+}
+
+input {
+  width: 100%;
+  height: 38px;
+  padding: 4px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: inherit;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #707070;
+  border-radius: 0;
+  box-shadow: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.control-label,
+#root_Thinning_Diameter__title {
+  display: inline-block;
+  margin-bottom: 6px;
+  font-size: 24px;
+  color: #16191f;
+}
+
+.field-description {
+  margin-bottom: 6px;
+  font-size: 18px;
+  color: #687078;
+}
+
+.required {
+  display: none;
+}
+
+.SDMD-explanation-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.explanation-item {
+  margin-right: 24px;
+}
+
+.Plant-items {
+  margin-bottom: 24px;
+}
+
+// .RegenerationCost,
+// .ThinningPercent {
+//   .array-item {
+//     // margin-bottom: 24px;
+
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//   }
+// }
+
+.RegenerationCost,
+.ThinningPercent,
+.HarvestingAges,
+.Plant-items {
+  .array-item-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .array-item {
+      width: calc(50% - 16px * 1 / 2);
+      margin-right: 16px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.HarvestingAges {
+  .array-item {
+    width: calc(50% - 16px * 1 / 2);
+    margin-right: 16px;
+
+    &:nth-child(2) {
+      margin-right: 0;
+      margin-bottom: 24px;
+    }
+
+    &:last-child {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+}
+
+.Thinning-flex-items,
+.Clearcut-flex-items {
+  display: flex;
+  flex-wrap: wrap;
+
+  .Thinning-item,
+  .Clearcut-item {
+    width: calc(50% - 16px * 1 / 2);
+
+    &:nth-child(2n) {
+      padding-left: 0;
+      margin-right: 0;
+    }
+
+    &:nth-child(2n+1) {
+      padding-right: 0;
+      padding-bottom: 0;
+      margin-right: 16px;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+
+// .lineChart {
+//   display: block;
+//   margin: 30px auto;
+// }
+
+.Thinning-diameter {
+  .array-item-list {
+    display: flex;
+    white-space: nowrap;
+
+    &::before {
+      flex-shrink: 0;
+      width: 100px;
+      padding: 4px 16px;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 2;
+      color: inherit;
+      content: '胸腔直径(cm)';
+      background-color: transparent;
+      background-image: none;
+      border: 1px solid #707070;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+
+  padding: 24px 48px 0;
+}
+
+.Thinning-price {
+  .array-item-list {
+    display: flex;
+    white-space: nowrap;
+
+    &::before {
+      flex-shrink: 0;
+      width: 100px;
+      padding: 4px 16px;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 2;
+      color: inherit;
+      content: '価格(円)';
+      background-color: transparent;
+      background-image: none;
+      border: 1px solid #707070;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+
+  .field-array-fixed-items {
+    display: flex;
+  }
+
+  padding: 0 48px;
+}

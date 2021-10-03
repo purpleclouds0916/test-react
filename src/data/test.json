@@ -1,0 +1,42 @@
+{
+  "SDMD": {
+    "H": [24.72, -1.066, -0.0348, 1],
+    "V": [0.07156, -1.373859, 5062, -2.902205],
+    "NRF": 5.370947,
+    "DBH": [0.19385, 0.987164, -0.090657],
+    "HF": [0.650787, 0.417356, 0.138768]
+  },
+  "Density": { "Plant": [1000, 10000], "Minimum": 500 },
+  "RegenerationCost": [928070, 128.292],
+  "ThinningPercent": [0, 50],
+  "AnnualInterestPercent": -0.090657,
+  "HarvestingAges": [10, 110, 5],
+  "MaxNumOfHarvest": 10,
+  "Thinning": {
+    "YieldRate": 0.58,
+    "Cost": 5166,
+    "StumpHeight": 0.5,
+    "LogLength": 4,
+    "LoggingPitch": 4.1,
+    "Diameter": [5, 6, 15, 16, 18, 20, 22, 24, 28, 30, 255],
+    "Price": [0, 3000, 3000, 8000, 8000, 9500, 9500, 11500, 11500, 12500, 12500]
+  },
+  "Clearcut": {
+    "YieldRate": 0.58,
+    "Cost": 5166,
+    "StumpHeight": 0.5,
+    "LogLength": 4,
+    "LoggingPitch": 4.1,
+    "Diameter": [5, 6, 15, 16, 18, 20, 22, 24, 28, 30, 255],
+    "Price": [0, 3000, 3000, 8000, 8000, 9500, 9500, 11500, 11500, 12500, 12500]
+  },
+  "SA": {
+    "NumRepeat": 40,
+    "NumTempLevel": 100,
+    "NumTotalLoopN": [1, 2, 7],
+    "NumTotalLoopPow": [2.6, 4.26, 5.75],
+    "StartTemp": [0, -0.6, 0.6, 5],
+    "DiffTemp": [0, -3.8, 1.4, 5],
+    "DistScale": [0, -1.2, 0.6, 5]
+  }
+}
