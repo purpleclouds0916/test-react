@@ -81,11 +81,15 @@ legend {
 .Simulated_Annealing,
 .YieldModelType,
 .SAType,
+.H-items,
+.V-items,
 .NRF-input,
 .DBH-items,
 .HF-items,
 .Clearcut-diameter,
 .Clearcut-price,
+.Thinning-diameter,
+.Thinning-price,
 .hidden {
   display: none;
 }
