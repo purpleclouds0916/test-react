@@ -209,16 +209,7 @@ const Form = () => {
         </select>
         <br />
 
-        {watchSdmd ? (
-          <>
-            {/* // eslint-disable-next-line jsx-a11y/label-has-associated-control */}            
-            {/* {console.log("出力します",watchSdmd.DBH)} */}
-            {/* {watchSdmd.DBH} */}
-    
-          </>
-        ) : (
-          ''
-        )}
+        {watchSdmd ? <>{watchSdmd}</> : ''}
 
         <br />
         <TeX>{String.raw`G = V/HF`}</TeX>
