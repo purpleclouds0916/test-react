@@ -120,11 +120,11 @@ const Form = () => {
     },
     [DBHFields.length, setValue],
   );
-  const watchAllFields = watch();
-  console.log('watchAllFields', watchAllFields);
+  // const watchAllFields = watch();
+  // console.log('watchAllFields', watchAllFields);
   // eslint-disable-next-line camelcase
   const watchSdmd: any = watch('SDMD');
-  console.log(watchSdmd.DBH);
+  // console.log(watchSdmd.DBH);
 
   const onSubmit = (data: FormValues) => {
     const DataSdmdH: number[] = [];
@@ -209,7 +209,14 @@ const Form = () => {
         </select>
         <br />
 
-        {watchSdmd ? <>{watchSdmd}</> : ''}
+        {watchSdmd ? (
+          <>
+            {watchSdmd}
+            {/* {console.log(watchSdmd)} */}
+          </>
+        ) : (
+          ''
+        )}
 
         <br />
         <TeX>{String.raw`G = V/HF`}</TeX>
