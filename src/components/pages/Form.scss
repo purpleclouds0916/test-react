@@ -1,0 +1,254 @@
+//
+//react-css
+//
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+li,
+dt,
+dd,
+p,
+div,
+span,
+img,
+a,
+table,
+tr,
+th,
+td {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  border: 0;
+}
+
+header,
+footer,
+nav,
+section,
+article,
+aside,
+figure,
+figcaption {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+  list-style-type: none;
+}
+
+.display-none {
+  display: none;
+}
+
+.all-form-item {
+  width: 1200px;
+  max-width: 100%;
+  height: inherit;
+  margin: 24px;
+  margin: 0 auto;
+  margin-bottom: 48px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+
+  .form-title {
+    display: block;
+    max-width: 100%;
+    padding: 32px 48px;
+    font-size: 24px;
+    font-weight: 700;
+    background: #fafafa;
+  }
+
+  .input-form-items {
+    // padding: 32px 48px 0;
+
+    .control-label {
+      display: inline-block;
+      margin-bottom: 6px;
+      font-size: 24px;
+      color: #16191f;
+    }
+
+    .control-description {
+      margin-bottom: 6px;
+      font-size: 18px;
+      color: #687078;
+    }
+
+    // &:last-child {
+    //   padding-bottom: 32px;
+    // }
+  }
+}
+
+.sdmd-items {
+  padding-bottom: 24px;
+}
+
+.sdmd-form-item {
+  padding: 24px;
+}
+
+.sdmd-katexs-items {
+  .sdmd-katex-formula {
+    padding-left: 48px;
+    margin-bottom: 24px;
+  }
+
+  .sdmd-katex-description {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    // max-width: 900px;
+
+    .explanation-item {
+      margin-right: 24px;
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.field-description {
+  margin-bottom: 6px;
+  font-size: 18px;
+  color: #687078;
+}
+
+.management-items {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24px 24px 0;
+
+  .input-form-items {
+    margin-right: 0;
+    margin-bottom: 24px;
+
+    &:nth-child(1),
+    &:nth-child(4),
+    &:nth-child(6),
+    &:nth-child(9),
+    &:nth-child(11) {
+      margin-right: 24px;
+    }
+  }
+
+  .input-plants,
+  .regenerationCost-inputs,
+  .thinningPercent-inputs,
+  .harvesting-ages-input,
+  .max-num-of-harvest-item {
+    width: calc(50% - 24px * 1 / 2);
+  }
+
+  .minimum-input,
+  .annualInterestPercent-item {
+    width: 100%;
+  }
+}
+
+.thinning-form-items {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24px 24px 0;
+
+  .input-form-items {
+    margin-right: 0;
+    margin-bottom: 24px;
+
+    &:nth-child(2),
+    &:nth-child(4) {
+      margin-right: 24px;
+    }
+
+    &:last-child {
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        color: red;
+        border-radius: 0;
+
+        li {
+          width: calc((100% - 130px) / 11);
+          color: red;
+          border-radius: 0;
+
+          &:nth-child(1),
+          &:nth-child(13) {
+            width: 130px;
+          }
+
+          .fieldset {
+            border-radius: 0;
+          }
+        }
+
+        .TextField-without-border-radius fieldset {
+          border-radius: 0;
+        }
+
+
+
+        .thinning-diameter-input {
+          position: relative;
+        }
+
+        .diamter-error-message {
+          position: absolute;
+          font-size: 12px;
+          padding: 2px;
+          bottom: 56px;
+        }
+      }
+    }
+  }
+
+  .yield-rate-item {
+    width: 100%;
+  }
+
+  .cost-item,
+  .stump-height-item,
+  .log-length-input,
+  .logging-pitch-input {
+    width: calc(50% - 24px * 1 / 2);
+  }
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-radius: 0;
+}
+
+.Mui-disabled {
+  color :red;
+}
+
+.thinning-diameter-input {
+  position: relative;
+}
+
+

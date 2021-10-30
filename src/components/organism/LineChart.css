@@ -1,17 +1,12 @@
 #d3demo {
-  width: 80vw;
-  height: 50vh;
-  padding: 100px;
-  overflow: visible;
+  width: inherit;
+  height: 70vh;
+  margin-right: 24px;
 }
 
 text {
   z-index: 100;
   font-size: 8px;
-}
-
-svg + g {
-  margin-right: -20px;
 }
 
 .grid line {
@@ -32,17 +27,8 @@ svg + g {
   font-weight: 400;
 }
 
-.lineChartText {
-  padding: 24px 48px 0;
-}
-
-.lineChart {
-  padding-bottom: 24px;
-}
-
 .lineChart svg {
   display: block;
-  margin: 0 0 0 48px;
 }
 
 .tooltip {

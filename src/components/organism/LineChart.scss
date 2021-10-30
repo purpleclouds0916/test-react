@@ -1,8 +1,9 @@
 #d3demo {
-  width: 80vw;
-  height: 50vh;
-  padding: 100px;
-  overflow: visible;
+  width: inherit;
+  height: 70vh;
+  // overflow: visible;
+  // margin-left: -48px;
+  margin-right: 24px;
 }
 
 text {
@@ -11,7 +12,7 @@ text {
 }
 
 svg + g {
-  margin-right: -20px;
+  // margin-right: -20px;
 }
 
 .grid line {
@@ -33,15 +34,15 @@ svg + g {
 }
 
 .lineChartText {
-  padding: 24px 48px 0;
+  // padding: 24px 48px 0;
 }
 
 .lineChart {
-  padding-bottom: 24px;
+  // padding-bottom: 24px;
 
   svg {
     display: block;
-    margin: 0 0 0 48px;
+    // margin: 0 0 0 48px;
   }
 }
 

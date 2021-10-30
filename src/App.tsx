@@ -1,9 +1,14 @@
 import { VFC } from 'react';
+
+// import Test from './components/pages/Test';
+// import Test1 from './components/pages/Test1';
 import Form from './components/pages/Form';
+
 
 const App: VFC = () => (
   <div className="App">
-    <Form />
+    {/* <Test1 /> */}
+   <Form/>
   </div>
 );
 

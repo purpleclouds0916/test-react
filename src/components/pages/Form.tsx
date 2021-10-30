@@ -1,130 +1,178 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable array-callback-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-plusplus */
-import React, { useCallback } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable import/no-cycle */
+/* eslint-disable array-callback-return */
+
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import schema from '../../validation/MainValidation';
+
 import 'katex/dist/katex.min.css';
-import TeX from '@matejmazur/react-katex';
-
 import Headers from './Header';
-import '../../App.css';
-
+import './Form.css';
 import StandDensityManagementData from '../../data/StandDensityManagementData.json';
+import Management from '../organism/ManagementForm';
+import DensityManagement from '../organism/DensityManagement';
+import LoggingCostCalculator from '../organism/LoggingCostCalculator';
 
-type FormValues = {
+export type FormValues = {
+  firstName: string;
+  age: number;
   region: string;
   SDMD: {
-    // eslint-disable-next-line camelcase
     NRf: number;
     H: { value: number }[];
     V: { value: number }[];
     DBH: { value: number }[];
     HF: { value: number }[];
   };
+
+  Density: { Plant: { value: number }[]; Minimum: number };
+  RegenerationCost: { value: number }[];
+  ThinningPercent: { value: number }[];
+  AnnualInterestPercent: number;
+  HarvestingAges: { value: number }[];
+  MaxNumOfHarvest: number;
+  Thinning: {
+    YieldRate: number;
+    Cost: number;
+    StumpHeight: number;
+    LogLength: number;
+    LoggingPitch: number;
+    Diameter: { value: number }[];
+    Price: { value: number }[];
+  };
+  Clearcut: {
+    YieldRate: number;
+    Cost: number;
+    StumpHeight: number;
+    LogLength: number;
+    LoggingPitch: number;
+    Diameter: { value: number }[];
+    Price: { value: number }[];
+  };
 };
 
+// interface IFormInputs {
+//   firstName: string;
+//   age: number;
+// }
+
 const Form = () => {
-  const { register, handleSubmit, control, setValue, watch } =
-    useForm<FormValues>({
-      defaultValues: {
-        SDMD: {
-          H: [
-            { value: StandDensityManagementData.tohoku.SH.SDMD.H[0] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.H[1] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.H[2] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.H[3] },
-          ],
-          V: [
-            { value: StandDensityManagementData.tohoku.SH.SDMD.V[0] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.V[1] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.V[2] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.V[3] },
-          ],
-          NRf: StandDensityManagementData.tohoku.SH.SDMD.NRf,
-          DBH: [
-            { value: StandDensityManagementData.tohoku.SH.SDMD.DBH[0] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.DBH[1] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.DBH[2] },
-          ],
-          HF: [
-            { value: StandDensityManagementData.tohoku.SH.SDMD.HF[0] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.HF[1] },
-            { value: StandDensityManagementData.tohoku.SH.SDMD.HF[2] },
-          ],
-        },
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    formState: { errors },
+    clearErrors,
+  } = useForm<FormValues>({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+    defaultValues: {
+      SDMD: {
+        H: [
+          { value: StandDensityManagementData.tohoku.SH.SDMD.H[0] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.H[1] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.H[2] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.H[3] },
+        ],
+        V: [
+          { value: StandDensityManagementData.tohoku.SH.SDMD.V[0] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.V[1] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.V[2] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.V[3] },
+        ],
+        NRf: StandDensityManagementData.tohoku.SH.SDMD.NRf,
+        DBH: [
+          { value: StandDensityManagementData.tohoku.SH.SDMD.DBH[0] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.DBH[1] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.DBH[2] },
+        ],
+        HF: [
+          { value: StandDensityManagementData.tohoku.SH.SDMD.HF[0] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.HF[1] },
+          { value: StandDensityManagementData.tohoku.SH.SDMD.HF[2] },
+        ],
       },
-    });
-
-  const { fields: HFields } = useFieldArray({
-    control,
-    name: 'SDMD.H',
-  });
-  const { fields: VFields } = useFieldArray({ control, name: 'SDMD.V' });
-  // eslint-disable-next-line
-  const { fields: DBHFields, remove: DBHRemove } = useFieldArray({
-    control,
-    name: 'SDMD.DBH',
-  });
-  // eslint-disable-next-line
-  const { fields: HFFields, remove: HFRemove } = useFieldArray({
-    control,
-    name: 'SDMD.HF',
-  });
-
-  const onSetValue = useCallback(
-    (e) => {
-      //  配列の数に応じて、不要なフォームを削除する
-      if (
-        // eslint-disable-next-line
-        // @ts-ignore
-        StandDensityManagementData[e.target.value].SH.SDMD.DBH.length === 2 &&
-        DBHFields.length === 3
-      ) {
-        DBHRemove(2);
-      }
-      if (
-        // eslint-disable-next-line
-        // @ts-ignore
-        StandDensityManagementData[e.target.value].SH.SDMD.HF.length === 2 &&
-        HFFields.length === 3
-      ) {
-        HFRemove(2);
-      }
-
-      // SDMDのH,V,DBH,HFは配列なので、まとめて代入
-      // eslint-disable-next-line
-      const SDMD_Property: string[] = ['H', 'V', 'DBH', 'HF'];
-      // eslint-disable-next-line camelcase
-      SDMD_Property.map((property) => {
-        // eslint-disable-next-line
-        // @ts-ignore
-        StandDensityManagementData[e.target.value].SH.SDMD[property].map(
-          // eslint-disable-next-line array-callback-return
-          (value: number, index: number) => {
-            // eslint-disable-next-line
-            // @ts-ignore
-            setValue(`SDMD.${property}.${index}.value`, value);
-          },
-        );
-      });
-      // SDMDのNRfの値は配列ではないので、個別で代入
-      setValue(
-        `SDMD.NRf`,
-        // eslint-disable-next-line
-        // @ts-ignore
-        StandDensityManagementData[e.target.value].SH.SDMD.NRf,
-      );
+      Density: { Plant: [{ value: 1000 }, { value: 10000 }], Minimum: 500 },
+      RegenerationCost: [{ value: 928070 }, { value: 128.292 }],
+      ThinningPercent: [{ value: 0 }, { value: 50 }],
+      AnnualInterestPercent: -0.090657,
+      HarvestingAges: [{ value: 10 }, { value: 110 }, { value: 5 }],
+      MaxNumOfHarvest: 10,
+      Thinning: {
+        YieldRate: 0.58,
+        Cost: 5166,
+        StumpHeight: 0.5,
+        LogLength: 4,
+        LoggingPitch: 4.1,
+        Diameter: [
+          { value: 5 },
+          { value: 6 },
+          { value: 15 },
+          { value: 16 },
+          { value: 18 },
+          { value: 20 },
+          { value: 22 },
+          { value: 24 },
+          { value: 28 },
+          { value: 30 },
+          { value: 40 },
+        ],
+        Price: [
+          { value: 0 },
+          { value: 3000 },
+          { value: 3000 },
+          { value: 8000 },
+          { value: 8000 },
+          { value: 9500 },
+          { value: 9500 },
+          { value: 11500 },
+          { value: 11500 },
+          { value: 12500 },
+          { value: 12500 },
+        ],
+      },
+      Clearcut: {
+        YieldRate: 0.58,
+        Cost: 5166,
+        StumpHeight: 0.5,
+        LogLength: 4,
+        LoggingPitch: 4.1,
+        Diameter: [
+          { value: 5 },
+          { value: 6 },
+          { value: 15 },
+          { value: 16 },
+          { value: 18 },
+          { value: 20 },
+          { value: 22 },
+          { value: 24 },
+          { value: 28 },
+          { value: 30 },
+          { value: 40 },
+        ],
+        Price: [
+          { value: 0 },
+          { value: 3000 },
+          { value: 3000 },
+          { value: 8000 },
+          { value: 8000 },
+          { value: 9500 },
+          { value: 9500 },
+          { value: 11500 },
+          { value: 11500 },
+          { value: 12500 },
+          { value: 12500 },
+        ],
+      },
     },
-    [DBHFields.length, setValue],
-  );
-  // const watchAllFields = watch();
-  // console.log('watchAllFields', watchAllFields);
-  // eslint-disable-next-line camelcase
-  const watchSdmd: any = watch('SDMD');
-  // console.log(watchSdmd.DBH);
+  });
 
   const onSubmit = (data: FormValues) => {
     const DataSdmdH: number[] = [];
@@ -157,10 +205,95 @@ const Form = () => {
           DBH: DataSdmdDBH,
           HF: DataSdmdHF,
         },
+        Density: {
+          Plant: [data.Density.Plant[0].value, data.Density.Plant[1].value],
+          Minimum: data.Density.Minimum,
+        },
+        RegenerationCost: [
+          data.RegenerationCost[0].value,
+          data.RegenerationCost[1].value,
+        ],
+        ThinningPercent: [
+          data.ThinningPercent[0].value,
+          data.ThinningPercent[1].value,
+        ],
+        AnnualInterestPercent: data.AnnualInterestPercent,
+        HarvestingAges: [
+          data.HarvestingAges[0].value,
+          data.HarvestingAges[1].value,
+          data.HarvestingAges[2].value,
+        ],
+        MaxNumOfHarvest: data.MaxNumOfHarvest,
+        Thinning: {
+          YieldRate: data.Thinning.YieldRate,
+          Cost: data.Thinning.Cost,
+          StumpHeight: data.Thinning.StumpHeight,
+          LogLength: data.Thinning.LogLength,
+          LoggingPitch: data.Thinning.LoggingPitch,
+          Diameter: [
+            data.Thinning.Diameter[0].value,
+            data.Thinning.Diameter[1].value,
+            data.Thinning.Diameter[2].value,
+            data.Thinning.Diameter[3].value,
+            data.Thinning.Diameter[4].value,
+            data.Thinning.Diameter[5].value,
+            data.Thinning.Diameter[6].value,
+            data.Thinning.Diameter[7].value,
+            data.Thinning.Diameter[8].value,
+            data.Thinning.Diameter[9].value,
+            data.Thinning.Diameter[10].value,
+          ],
+          Price: [
+            data.Thinning.Price[0].value,
+            data.Thinning.Price[1].value,
+            data.Thinning.Price[2].value,
+            data.Thinning.Price[3].value,
+            data.Thinning.Price[4].value,
+            data.Thinning.Price[5].value,
+            data.Thinning.Price[6].value,
+            data.Thinning.Price[7].value,
+            data.Thinning.Price[8].value,
+            data.Thinning.Price[9].value,
+            data.Thinning.Price[10].value,
+          ],
+        },
+        Clearcut: {
+          YieldRate: data.Clearcut.YieldRate,
+          Cost: data.Clearcut.Cost,
+          StumpHeight: data.Clearcut.StumpHeight,
+          LogLength: data.Clearcut.LogLength,
+          LoggingPitch: data.Clearcut.LoggingPitch,
+          Diameter: [
+            data.Clearcut.Diameter[0].value,
+            data.Clearcut.Diameter[1].value,
+            data.Clearcut.Diameter[2].value,
+            data.Clearcut.Diameter[3].value,
+            data.Clearcut.Diameter[4].value,
+            data.Clearcut.Diameter[5].value,
+            data.Clearcut.Diameter[6].value,
+            data.Clearcut.Diameter[7].value,
+            data.Clearcut.Diameter[8].value,
+            data.Clearcut.Diameter[9].value,
+            data.Clearcut.Diameter[10].value,
+          ],
+          Price: [
+            data.Clearcut.Price[0].value,
+            data.Clearcut.Price[1].value,
+            data.Clearcut.Price[2].value,
+            data.Clearcut.Price[3].value,
+            data.Clearcut.Price[4].value,
+            data.Clearcut.Price[5].value,
+            data.Clearcut.Price[6].value,
+            data.Clearcut.Price[7].value,
+            data.Clearcut.Price[8].value,
+            data.Clearcut.Price[9].value,
+            data.Clearcut.Price[10].value,
+          ],
+        },
       },
     };
-    // console.log(JSON.stringify(data.SDMD))
     console.log(JSON.stringify(Json));
+    // console.log(JSON.stringify(data));
   };
 
   return (
@@ -168,58 +301,41 @@ const Form = () => {
       <Headers description="経営に関する数値を入力するだけで、最適な経営方法を提案します" />
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('SDMD.NRf')} />
-        <ul>
-          {HFields.map((field, index) => (
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            <li key={field.id}>
-              <input {...register(`SDMD.H.${index}.value` as const)} />
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {VFields.map((field, index) => (
-            <li key={field.id}>
-              <input {...register(`SDMD.V.${index}.value` as const)} />
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {DBHFields.map((field, index) => (
-            <li key={field.id}>
-              <input {...register(`SDMD.DBH.${index}.value` as const)} />
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {HFFields.map((field, index) => (
-            <li key={field.id}>
-              <input {...register(`SDMD.HF.${index}.value` as const)} />
-            </li>
-          ))}
-        </ul>
-        <select
-          {...register('region')}
-          onChange={(e) => {
-            onSetValue(e);
-          }}
-        >
-          <option value="tohoku">tohoku</option>
-          <option value="kyushuShikoku">kyushuShikoku</option>
-        </select>
-        <br />
-
-        {watchSdmd ? (
-          <>
-            {watchSdmd}
-            {/* {console.log(watchSdmd)} */}
-          </>
-        ) : (
-          ''
-        )}
-
-        <br />
-        <TeX>{String.raw`G = V/HF`}</TeX>
+        <DensityManagement
+          register={register}
+          handleSubmit={handleSubmit}
+          control={control}
+          setValue={setValue}
+          watch={watch}
+        />
+        <Management
+          register={register}
+          handleSubmit={handleSubmit}
+          control={control}
+          setValue={setValue}
+          watch={watch}
+          errors={errors}
+        />
+        <LoggingCostCalculator
+          register={register}
+          handleSubmit={handleSubmit}
+          control={control}
+          setValue={setValue}
+          watch={watch}
+          loggingMethod="Thinning"
+          errors={errors}
+          clearErrors={clearErrors}
+        />
+        <LoggingCostCalculator
+          register={register}
+          handleSubmit={handleSubmit}
+          control={control}
+          setValue={setValue}
+          watch={watch}
+          loggingMethod="Clearcut"
+          errors={errors}
+          clearErrors={clearErrors}
+        />
         <input type="submit" />
       </form>
     </div>

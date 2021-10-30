@@ -1,19 +1,70 @@
-import React, { useEffect, useRef } from 'react';
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable no-plusplus */
+/* eslint-disable import/no-cycle */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/no-unused-prop-types */
+import React, { useEffect, useRef, VFC } from 'react';
+import {
+  useFieldArray,
+  Controller,
+  Control,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch,
+} from 'react-hook-form';
 import * as d3 from 'd3';
+import { FormValues } from '../pages/Form';
+
 import './LineChart.css';
+
 // eslint-disable-next-line
-const LineChart = (props: {
+type Props = {
   description: string;
   title: string;
   loggingMethod: string;
-}) => {
+  register: UseFormRegister<FormValues>;
+  handleSubmit: UseFormHandleSubmit<FormValues>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  control: Control<FormValues, object>;
+  setValue: UseFormSetValue<FormValues>;
+  watch: UseFormWatch<FormValues>;
+  clearErrors: any;
+};
+const LineChart: VFC<Props> = (props) => {
   // eslint-disable-next-line
-  const loggingMethod = props.loggingMethod;
+  const {
+    description,
+    title,
+    loggingMethod,
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    clearErrors,
+  } = props;
 
   const d3Chart = useRef();
+  // eslint-disable-next-line
+  // @ts-ignore
+  const watchCostCalculation: any = watch(`${loggingMethod}`);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  // console.log(watchSdmd);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const points: Array<Array<number>> = [];
+  for (let index = 0; index < 11; index++) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    const Xelement = Number(watchCostCalculation.Diameter[index].value);
+    const Yelement = Number(watchCostCalculation.Price[index].value);
+    points[index] = [Xelement, Yelement];
+  }
 
   useEffect(() => {
-    const margin = { top: 20, right: 0, bottom: 50, left: 60 };
+    const margin = { top: 20, right: 0, bottom: 70, left: 80 };
     const width =
       parseInt(d3.select('#d3demo').style('width'), 10) -
       margin.left -
@@ -25,26 +76,7 @@ const LineChart = (props: {
 
     // const points: Array<Array<number>>= []
 
- // eslint-disable-next-line
-    const points:Array<Array<number>>= []
-     // eslint-disable-next-line
-    for (let index = 0; index < 11; index++) {
-      // eslint-disable-next-line
-      let Xelement = document.getElementById(`root_Thinning_Diameter_${index}`);
-      // eslint-disable-next-line
-      // @ts-ignore
-      console.log(Xelement.value);
-      // eslint-disable-next-line
-      let Yelement = document.getElementById(`root_Thinning_Price_${index}`);
-      // eslint-disable-next-line
-      // @ts-ignore
-      console.log(Yelement.value);
-   // eslint-disable-next-line
-      // @ts-ignore
-      let arr:Array<number> = [Xelement.value, Yelement.value]   // eslint-disable-line
-        // eslint-disable-next-line
-      points.push(arr)
-    }
+    // eslint-disable-next-line
 
     // console.log(array)
     // const points: Array<Array<number>> = [
@@ -60,6 +92,13 @@ const LineChart = (props: {
     //   [30, 12500],
     //   [40, 12500],
     // ];
+
+    d3
+      // eslint-disable-next-line
+      // @ts-ignore
+      .select(d3Chart.current)
+      .selectAll('*')
+      .remove();
 
     const svg = d3
       // eslint-disable-next-line
@@ -103,12 +142,14 @@ const LineChart = (props: {
     ];
 
     const focus = svg.append('g');
+
     // eslint-disable-next-line
     // @ts-ignore
     x.domain(d3.extent(AxisRange, (d: Array<Array<number>>) => d[0]));
     // eslint-disable-next-line
     // @ts-ignore
     y.domain(d3.extent(AxisRange, (d: Array<Array<number>>) => d[1]));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 
     focus
       .append('path')
@@ -138,6 +179,12 @@ const LineChart = (props: {
       .attr('id', (d, i: number): string => `id-${i}`)
       .classed('cirStyle', true)
       .on('mouseover', (e, d: Array<number>) => {
+        // console.log(e,d)
+        const idAsString = e.toElement.id; // eslint-disable-line
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        const id = Number(idAsString.replace(/[^0-9]/g, ''));
+        console.log(points);
+        console.log(id);
         tooltip.style('visibility', 'visible').html(
           // eslint-disable-next-line
           '胸腔直径:' +
@@ -149,6 +196,12 @@ const LineChart = (props: {
         );
       })
       .on('mousemove', (e, d: Array<number>) => {
+        const idAsString = e.toElement.id; // eslint-disable-line
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        const id = Number(idAsString.replace(/[^0-9]/g, ''));
+        console.log(points);
+        console.log(id);
+
         tooltip
           // eslint-disable-next-line
           // @ts-ignore
@@ -158,11 +211,12 @@ const LineChart = (props: {
           .style('left', event.pageX + 10 + 'px') // eslint-disable-line
           .html(
             // eslint-disable-next-line
+            // eslint-disable-next-line
             '胸腔直径:' +
-              Math.round(d[0] * 10) / 10 + // eslint-disable-line
+              points[id][0] + // eslint-disable-line
               'cm' +
               '<br>金額: ' +
-              Math.round(d[1] / 100) * 100 + // eslint-disable-line
+              points[id][1] + // eslint-disable-line
               '円',
           );
       })
@@ -240,37 +294,20 @@ const LineChart = (props: {
       // eslint-disable-next-line
       // @ts-ignore
       const idAsString = this.id; // eslint-disable-line
-      const id = String(idAsString.replace(/[^0-9]/g, '')); // eslint-disable-line
-      const logging_Diameter_ID = `root_${loggingMethod}_Diameter_` + id; // eslint-disable-line
-      const logging_Price_ID = `root_${loggingMethod}_Price_` + id; // eslint-disable-line
+      const number = Number(idAsString.replace(/[^0-9]/g, '')); // eslint-disable-line
 
-      // eslint-disable-next-line
-      const logging_Diameter_Element =
-        document.getElementById(logging_Diameter_ID); // eslint-disable-line
-      const logging_Price_Element = document.getElementById(logging_Price_ID); // eslint-disable-line
+      const PriceValue = Math.round(d.subject[1] / 100) * 100; // eslint-disable-line
+      const PriceDiameter = Math.round(d.subject[0] * 10) / 10; // eslint-disable-line
       // eslint-disable-next-line
       // @ts-ignore
-      logging_Diameter_Element.value = Math.round(d.subject[0] * 10) / 10; // eslint-disable-line
+      setValue(`${loggingMethod}.Price.${number}.value`, PriceValue);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      clearErrors(`${loggingMethod}.Price.${number}.value`);
       // eslint-disable-next-line
       // @ts-ignore
-      logging_Price_Element.value = Math.round(d.subject[1] / 100) * 100; // eslint-disable-line
-
-      //  入力フォームの変更をreactに知らせる
-      // eslint-disable-next-line
-      // @ts-ignore
-      logging_Diameter_Element._valueTracker.setValue(''); // eslint-disable-line
-      // eslint-disable-next-line
-      // @ts-ignore
-      logging_Price_Element._valueTracker.setValue(''); // eslint-disable-line
-      // eslint-disable-next-line
-      logging_Diameter_Element!.dispatchEvent(
-        new Event('input', { bubbles: true }),
-      );
-
-      // eslint-disable-next-line
-      logging_Price_Element!.dispatchEvent(
-        new Event('input', { bubbles: true }),
-      );
+      setValue(`${loggingMethod}.Diameter.${number}.value`, PriceDiameter);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      clearErrors(`${loggingMethod}.Diameter.${number}.value`);
 
       tooltip.style('visibility', 'hidden');
     }
@@ -291,6 +328,7 @@ const LineChart = (props: {
     // gridlines in y axis function
     const makeYGridlines = () => d3.axisLeft(y).ticks(5);
     // add the X gridlines
+
     svg
       .append('g')
       .attr('class', 'grid')
@@ -333,7 +371,7 @@ const LineChart = (props: {
       .attr('text-anchor', 'middle')
       .attr('writing-mode', 'tb')
       .text('金額【円】');
-  }, [loggingMethod]);
+  }, [clearErrors, loggingMethod, points, setValue]);
 
   return (
     <div id="d3demo">
