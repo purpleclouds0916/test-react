@@ -55,13 +55,6 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
     clearErrors,
   } = props;
 
-  // console.log(errors)
-  // const test = { ...mainValidation };
-  // test.required = 'required!';
-  // console.log(test);
-  // console.log(mainValidation);
-  console.log(errors);
-
   const { fields: LoggingDiameterFields } = useFieldArray({
     control,
     // eslint-disable-next-line
@@ -286,14 +279,6 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
               <p className="field-description">
                 {formTitleAndDescription.Logging.Price.description}
               </p>
-              {/* {LoggingDiameterFields.map((LoggingDiameterField, index) => {
-                <>
-                  <p className="test">
-                    {
-                      console.log(errors)}
-                  </p>
-                </>;
-              })} */}
 
               <ul>
                 <li className="thinning-diameter-input-title TextField-without-border-radius">
@@ -302,11 +287,6 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                     variant="outlined"
                     defaultValue="胸高直径(cm)"
                     disabled
-                    // InputProps={{
-                    //   // eslint-disable-next-line
-                    //   // @ts-ignore
-                    //   className: { disabled: classes.disabledinput },
-                    // }}
                   />
                 </li>
                 {LoggingDiameterFields.map((LoggingDiameterField, index) => (
@@ -329,11 +309,6 @@ const LoggingCostCalculator: VFC<Props> = (props) => {
                           error={Boolean(
                             errors[loggingMethod]?.Diameter?.[index],
                           )}
-                          // helperText={
-                          //   errors[loggingMethod]?.Diameter &&
-                          //   errors[loggingMethod]?.Diameter?.[index]?.value
-                          //     ?.message
-                          // }
                         />
                       )}
                     />

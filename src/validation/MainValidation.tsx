@@ -102,7 +102,6 @@ const schema = yup
               'increase-left-diamter',
               '左の値以下の数字を入力してください',
               (value, id) => {
-                console.log(id);
                 const diamterId = Number(id.path.replace(/[^0-9]/g, ''));
                 if (diamterId !== 0 && 10) {
                   if (
@@ -121,7 +120,6 @@ const schema = yup
               'increase-right-diamter',
               '右の値以上の数字を入力してください',
               (value, id) => {
-                console.log(id);
                 const diamterId = Number(id.path.replace(/[^0-9]/g, ''));
                 if (diamterId !== 10) {
                   if (
@@ -192,7 +190,6 @@ const schema = yup
               'increase-left-diamter',
               '左の値以下の数字を入力してください',
               (value, id) => {
-                console.log(id);
                 const diamterId = Number(id.path.replace(/[^0-9]/g, ''));
                 if (diamterId !== 0 && 10) {
                   if (
@@ -211,7 +208,6 @@ const schema = yup
               'increase-right-diamter',
               '右の値以上の数字を入力してください',
               (value, id) => {
-                console.log(id);
                 const diamterId = Number(id.path.replace(/[^0-9]/g, ''));
                 if (diamterId !== 10) {
                   if (
