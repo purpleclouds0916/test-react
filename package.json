@@ -12,5 +12,8 @@
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client && yarn && yarn run build"
+  },
+  "engines": {
+    "node": "16.13.0"
   }
 }
