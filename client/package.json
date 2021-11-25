@@ -72,7 +72,7 @@
     "lint:style:fix": "stylelint --fix 'src/**/*.{css,less,sass,scss}'",
     "preinstall": "typesync || :"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "https://secret-inlet-04780.herokuapp.com/api/passwords",
   "eslintConfig": {
     "extends": [
       "react-app",
